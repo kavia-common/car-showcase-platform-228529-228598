@@ -33,11 +33,7 @@ function CompareInner() {
         return;
       }
       setLoading(true);
-      const results: CarModel[] = [];
-      for (const id of ids) {
-        const m = await api.getModel(id);
-        if (m) results.push(m);
-      }
+      const results = ids.length >= 2 ? await api.compare(ids) : [];
       if (alive) {
         setModels(results);
         setLoading(false);
